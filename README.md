@@ -1,4 +1,4 @@
-# MedTrack
+# pharmassist
 This Prescription Management System is a simple C++ program designed to manage prescriptions for patients. It allows users to add new prescriptions and display all existing prescriptions.
 
 ## Features
@@ -11,13 +11,13 @@ This Prescription Management System is a simple C++ program designed to manage p
 1. **Compile**: Compile the code using a C++ compiler.
    
    ```bash
-   g++ main.cpp -o prescription_manager
+   g++ main.cpp -o pharmassist
    ```
 
 2. **Run**: Execute the compiled program.
    
    ```bash
-   ./prescription_manager
+   ./pharmassist
    ```
 
 3. **Follow On-screen Instructions**: The program will prompt you to add prescriptions. Enter the required details for each prescription.
