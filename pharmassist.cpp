@@ -16,45 +16,50 @@ struct Prescription {
 // Prescription Management System class
 class PrescriptionManager {
 private:
-    vector<Prescription> prescriptions;
+    vector<Prescription> prescriptions; // Vector to store prescriptions
     string filename; // File to store prescriptions
 
 public:
+    // Constructor to initialize the PrescriptionManager with a filename
     PrescriptionManager(const string& filename) : filename(filename) {}
 
-    // Function to load prescriptions from the file
+    // Function to load prescriptions from a file
     void loadPrescriptions() {
         prescriptions.clear(); // Clear existing prescriptions
-        ifstream file(filename);
+        ifstream file(filename); // Open file for reading
         if (file.is_open()) {
             Prescription prescription;
+            // Read prescription details line by line
             while (getline(file, prescription.patientName)) {
                 getline(file, prescription.doctorName);
                 getline(file, prescription.medication);
                 getline(file, prescription.instructions);
-                prescriptions.push_back(prescription);
+                prescriptions.push_back(prescription); // Add prescription to vector
             }
-            file.close();
+            file.close(); // Close file
         }
     }
 
-    // Function to save prescriptions to file
+    // Function to save prescriptions to a file
     void savePrescriptions() {
-        ofstream file(filename);
+        ofstream file(filename); // Open file for writing
         if (file.is_open()) {
+            // Write each prescription detail to file
             for (const auto& prescription : prescriptions) {
                 file << prescription.patientName << endl;
                 file << prescription.doctorName << endl;
                 file << prescription.medication << endl;
                 file << prescription.instructions << endl;
             }
-            file.close();
+            file.close(); // Close file
         }
     }
 
     // Function to add a new prescription
+    // Parameters:
+    // - prescription: Prescription to be added
     void addPrescription(const Prescription& prescription) {
-        prescriptions.push_back(prescription);
+        prescriptions.push_back(prescription); // Add prescription to vector
         savePrescriptions(); // Save after adding
         cout << "Prescription added successfully.\n";
     }
@@ -67,6 +72,7 @@ public:
         }
 
         cout << "Prescriptions:\n";
+        // Display each prescription detail
         for (const auto& prescription : prescriptions) {
             cout << "Patient Name: " << prescription.patientName << endl;
             cout << "Doctor Name: " << prescription.doctorName << endl;
@@ -77,9 +83,12 @@ public:
     }
 
     // Function to update a prescription
+    // Parameters:
+    // - index: Index of the prescription to be updated in the prescriptions vector
+    // - newPrescription: Updated prescription details
     void updatePrescription(int index, const Prescription& newPrescription) {
         if (index >= 0 && index < prescriptions.size()) {
-            prescriptions[index] = newPrescription;
+            prescriptions[index] = newPrescription; // Update prescription
             savePrescriptions(); // Save after updating
             cout << "Prescription updated successfully.\n";
         } else {
@@ -88,9 +97,11 @@ public:
     }
 
     // Function to delete a prescription
+    // Parameters:
+    // - index: Index of the prescription to be deleted in the prescriptions vector
     void deletePrescription(int index) {
         if (index >= 0 && index < prescriptions.size()) {
-            prescriptions.erase(prescriptions.begin() + index);
+            prescriptions.erase(prescriptions.begin() + index); // Delete prescription
             savePrescriptions(); // Save after deleting
             cout << "Prescription deleted successfully.\n";
         } else {
@@ -100,7 +111,7 @@ public:
 };
 
 int main() {
-    PrescriptionManager manager("prescriptions.txt");
+    PrescriptionManager manager("prescriptions.txt"); // Create PrescriptionManager object with filename
 
     // Load existing prescriptions from the file
     manager.loadPrescriptions();
